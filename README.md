@@ -1,7 +1,21 @@
 # SE_PBL_PRJ MOSE CONTROL USING HAND GESTURES
 Hand gestures are used to apply mouse functions like left, right, double click, scroll up/down, control volume and brightness, etc.
-![1](https://github.com/Tejas9523/PBL_PRJ/assets/112255875/b718a021-74eb-446e-93b5-936ad40cddfd)
-![2](https://github.com/Tejas9523/PBL_PRJ/assets/112255875/c60707d8-7022-414d-a47f-3085fc01cb8a)
-![3](https://github.com/Tejas9523/PBL_PRJ/assets/112255875/7edc8bf8-8e24-4044-8be6-015592b59df8)
-![4](https://github.com/Tejas9523/PBL_PRJ/assets/112255875/930d485f-3e5a-4790-8d62-602a7fad70b8)
-![5](https://github.com/Tejas9523/PBL_PRJ/assets/112255875/6296e4de-27bc-42bb-99c6-2a09405887ca)
+
+
+**Requirements** - 
+flask
+cvzone
+opencv-python
+pyautogui
+comtypes
+pycaw
+screen_brightness_control
+
+tutorial
+![4](https://github.com/user-attachments/assets/ea13212e-0807-4e3e-93b0-d98c3a646716)
+![3](https://github.com/user-attachments/assets/326b3ac2-a053-4b59-92f4-01972ebe0b74)
+![2](https://github.com/user-attachments/assets/a1bd7150-1877-40ca-ab2f-d77dcc750a1c)
+![1](https://github.com/user-attachments/assets/9d5b3630-c586-46e1-b39d-b6f3776abfe8)
+![1](https://github.com/user-attachments/assets/f147a599-fbbf-4d63-be4c-f16265ebe392)
+![5](https://github.com/user-attachments/assets/99cc1a38-45bf-41d6-a548-2760ab204394)
+
