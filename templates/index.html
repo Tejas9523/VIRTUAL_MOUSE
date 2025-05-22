@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Mouse using Hand Gestures</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fff0f7 0%, #f7e6ff 100%);
+            color: #3a1a1a;
+        }
+
+        .header {
+            background: #fff;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+            padding: 24px 0 12px 0;
+            text-align: center;
+        }
+
+        .header img {
+            height: 40px;
+            margin-bottom: 8px;
+        }
+
+        .clg {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .dep {
+            font-size: 1.1rem;
+            color: #8e24aa;
+            margin-top: 4px;
+        }
+
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px;
+            margin: 40px auto 0 auto;
+            max-width: 1200px;
+        }
+
+        .pbl-section {
+            background: #ffe3f3;
+            border: 2px solid #ab0256;
+            border-radius: 24px;
+            box-shadow: 0 2px 24px rgba(171, 2, 86, 0.1);
+            display: flex;
+            align-items: flex-start;
+            padding: 32px;
+            min-width: 350px;
+            flex: 1 1 420px;
+            max-width: 1100px;
+        }
+
+        .pbl-section img {
+            border-radius: 16px;
+            margin-right: 32px;
+            box-shadow: 0 2px 16px rgba(171, 2, 86, 0.12);
+        }
+
+        .pbl-details {
+            flex: 1;
+        }
+
+        .pbl-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #ab0256;
+        }
+
+        .pbl-guide {
+            font-size: 1.1rem;
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        .tutorial-section {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 2px 24px rgba(103, 9, 9, 0.08);
+            margin: 48px auto 0 auto;
+            max-width: 1200px;
+            padding: 40px 32px;
+        }
+
+        .tutorial-section h1 {
+            text-align: center;
+            color: #8e24aa;
+            font-size: 2rem;
+            margin-bottom: 24px;
+        }
+
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 32px;
+            justify-items: center;
+        }
+
+        .pic {
+            background: #fff0f7;
+            border-radius: 16px;
+            padding: 18px 12px 12px 12px;
+            box-shadow: 0 2px 12px rgba(171, 2, 86, 0.08);
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .pic:hover {
+            transform: translateY(-6px) scale(1.04);
+            box-shadow: 0 6px 24px rgba(171, 2, 86, 0.17);
+        }
+
+        .pic img {
+            border: 2px solid #ff007e;
+            border-radius: 12px;
+            box-shadow: 0 1px 6px rgba(171, 2, 86, 0.09);
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 270px;
+            height: 150px;
+            object-fit: contain;
+        }
+
+        .pic-desc {
+            font-size: 1rem;
+            color: #3a1a1a;
+        }
+
+        .project-section {
+            background: linear-gradient(90deg, #ff007e 60%, #ff007e 100%);
+            color: #fff;
+            border-radius: 30px;
+            margin: 48px auto 0 auto;
+            max-width: 1200px;
+            box-shadow: 0 2px 32px rgba(171, 2, 86, 0.14);
+            display: flex;
+            align-items: flex-start;
+            padding: 40px 32px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 4rem;
+        }
+
+        .project-section img.hand-gif {
+            height: 320px;
+            margin-right: 48px;
+            border-radius: 20px;
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.09);
+        }
+
+        .project-details {
+            flex: 1;
+        }
+
+        .project-section h1 {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+
+        .project-section p {
+            font-size: 1.1rem;
+            margin-bottom: 14px;
+        }
+
+        .start-btn {
+            display: inline-flex;
+            align-items: center;
+            background: #fff;
+            color: #ab0256;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 24px;
+            box-shadow: 0 2px 12px rgba(171, 2, 86, 0.13);
+            padding: 12px 28px;
+            margin-top: 18px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .start-btn img {
+            margin-right: 10px;
+            height: 28px;
+        }
+
+        .start-btn:hover {
+            background: #ab0256;
+            color: #fff;
+        }
+
+        .mouse-gif {
+            position: absolute;
+            bottom: 18px;
+            right: 32px;
+            height: 80px;
+            opacity: 0.85;
+        }
+
+        @media (max-width: 1000px) {
+
+            .main-content,
+            .project-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .pbl-section,
+            .project-section {
+                max-width: 95vw;
+            }
+
+            .project-section img.hand-gif {
+                margin: 0 0 32px 0;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .tutorial-section,
+            .project-section,
+            .pbl-section {
+                padding: 18px 6px;
+            }
+
+            .tutorial-section h1,
+            .project-section h1,
+            .pbl-title {
+                font-size: 1.3rem;
+            }
+
+            .mouse-gif {
+                display: none;
+            }
+        }
+    </style>
+    <script>
+        function f1() {
+            var image = document.getElementById("1");
+            image.style.width = "100%";
+            image.style.height = "100%";
+        }
+        function f2() {
+            var image = document.getElementById("2");
+            image.style.width = "100%";
+            image.style.height = "100%";
+        }
+        function f3() {
+            var image = document.getElementById("3");
+            image.style.width = "100%";
+            image.style.height = "100%";
+        }
+        function f4() {
+            var image = document.getElementById("4");
+            image.style.width = "100%";
+            image.style.height = "100%";
+        }
+        function f5() {
+            var image = document.getElementById("5");
+            image.style.width = "100%";
+            image.style.height = "100%";
+        }
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <img src="{{ url_for('static', filename='DPU-Logo.png') }}" alt="DPU Logo">
+        <div class="clg">Dr DY Patil Institute of Technology, Pimpri</div>
+        <div class="dep">Artificial Intelligence & Data Science Department</div>
+    </div>
+
+    <div class="main-content">
+        <div class="pbl-section">
+            <img src="{{ url_for('static', filename='vector.gif') }}" alt="Vector" height="420">
+            <div class="pbl-details">
+                <div class="pbl-title">Project Based Learning</div>
+                <div class="pbl-guide">Guidance - Prof Shubhangi Vairagar Mam</div>
+                <hr>
+                <img src="{{ url_for('static', filename='Capture.PNG') }}" height="300"
+                    style="border-radius: 16px; margin-top: 12px;" alt="Capture">
+            </div>
+        </div>
+    </div>
+
+    <div class="tutorial-section">
+        <h1>Tutorial</h1>
+        <div class="tutorial-grid">
+            <div class="pic" onclick="f1()">
+                <img src="{{ url_for('static', filename='1.png') }}" alt="Cursor, Clicks" id="1">
+                <div class="pic-desc">Cursor, Left Click,<br>Right Click, Double Click</div>
+            </div>
+            <div class="pic" onclick="f2()">
+                <img src="{{ url_for('static', filename='2.png') }}" alt="Scrolling Up" id="2">
+                <div class="pic-desc">Scrolling Up</div>
+            </div>
+            <div class="pic" onclick="f3()">
+                <img src="{{ url_for('static', filename='3.png') }}" alt="Scrolling Down" id="3">
+                <div class="pic-desc">Scrolling Down</div>
+            </div>
+            <div class="pic" onclick="f4()">
+                <img src="{{ url_for('static', filename='4.png') }}" alt="Brightness" id="4">
+                <div class="pic-desc">Screen Brightness Control</div>
+            </div>
+            <div class="pic" onclick="f5()">
+                <img src="{{ url_for('static', filename='5.png') }}" alt="Volume" id="5">
+                <div class="pic-desc">System Volume Control</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-section">
+        <img src="{{ url_for('static', filename='HAND.gif') }}" class="hand-gif" alt="Hand Gesture">
+        <div class="project-details">
+            <h1>Virtual Mouse using Hand Gestures</h1>
+            <p>
+                A virtual mouse is a computer input device that allows users to control a cursor on a display screen
+                without the use of a physical mouse. Virtual mice can be controlled by various input methods, such as
+                hand gestures, head movements, or voice commands.
+            </p>
+            <p>
+                This project develops a virtual mouse controlled by hand gestures, implemented using a webcam and
+                computer vision algorithms. The algorithm tracks the user's hand movements and translates them into
+                mouse actions.
+            </p>
+            <form method="POST" action="/">
+                <button type="submit" name="run_mouse" value="1" class="start-btn">
+                    <img src="{{ url_for('static', filename='play.png') }}" alt="Run">
+                    Mouse
+                </button>&nbsp
+                <button type="submit" name="run_control" value="1" class="start-btn">
+                    <img src="{{ url_for('static', filename='play.png') }}" alt="Run">
+                    Control
+                </button>
+            </form>
+
+        </div>
+        <img src="{{ url_for('static', filename='mouse.gif') }}" class="mouse-gif" alt="Mouse Animation">
+    </div>
+</body>
+
+</html>
